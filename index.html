@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Subs">
+<meta name="theme-color" content="#000000">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'">
+<title>Football Subs</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav id="tabs">
+  <button data-view="setup" class="tab">Setup</button>
+  <button data-view="plan" class="tab">Rotation</button>
+  <button data-view="match" class="tab">Match</button>
+</nav>
+
+<main>
+<section id="view-setup" class="view">
+  <h2>Players</h2>
+  <p class="hint">Names stay on this phone only.</p>
+  <ul id="players"></ul>
+  <button id="addPlayer" class="big">+ Add player</button>
+
+  <h2>Settings</h2>
+  <div class="grid">
+    <label>On the pitch<input id="onField" type="number" inputmode="numeric" min="1" max="15"></label>
+    <label>Half length (min)<input id="halfMin" type="number" inputmode="decimal" min="1" max="60" step="0.5"></label>
+    <label>Min. minutes per half<input id="minMin" type="number" inputmode="decimal" min="0" max="60" step="0.5"></label>
+    <label>Sub interval (min)<input id="subInterval" type="number" inputmode="decimal" min="1" max="60" step="0.5"></label>
+  </div>
+  <div id="setupMsg" class="msg"></div>
+  <button id="generate" class="big primary">Generate rotation</button>
+  <p id="lockNote" class="hint"></p>
+</section>
+
+<section id="view-plan" class="view">
+  <div id="planMsg" class="msg"></div>
+  <p class="hint">Tap a player who is ON, then tap someone on the bench in the same block to swap them.</p>
+  <div id="planTables"></div>
+  <button id="regen" class="big">Regenerate (fair)</button>
+  <button id="toMatch" class="big primary">Go to match</button>
+</section>
+
+<section id="view-match" class="view">
+  <div id="halfLabel" class="half-label">Half 1</div>
+  <div id="clock" class="clock">00:00</div>
+  <button id="startPause" class="huge primary">Start</button>
+  <div id="nextSub" class="next"></div>
+  <button id="subDone" class="huge warn">Sub done</button>
+  <h3>On the field <span class="hint">(tap to swap; mins this half / match)</span></h3>
+  <ul id="fieldList" class="plist"></ul>
+  <h3>Bench</h3>
+  <ul id="benchList" class="plist"></ul>
+  <p id="wakeNote" class="hint"></p>
+  <button id="half2" class="huge primary hidden">Start half 2</button>
+  <button id="resetMatch" class="big danger">Reset match</button>
+</section>
+</main>
+
+<div id="flash" class="flash hidden"><div id="flashText"></div><div class="hint">Tap to dismiss</div></div>
+<div id="modal" class="modal hidden"><div class="modal-box"><div id="modalTitle"></div><div id="modalBody"></div>
+  <button id="modalClose" class="big">Cancel</button></div></div>
+
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
